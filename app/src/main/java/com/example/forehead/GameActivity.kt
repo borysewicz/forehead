@@ -1,35 +1,17 @@
 package com.example.forehead
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.Button
+import com.example.forehead.CategoryActivity.Companion.CAT_KEY
 
-class MainActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        initiateButtons()
+        setContentView(R.layout.activity_game)
     }
-
-    private fun initiateButtons() {
-        findViewById<Button>(R.id.welcome_newGame_B).setOnClickListener{
-            val intent = Intent(this,CategoryActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-
-
-
-
-
-
-
-
-
 
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -49,11 +31,11 @@ class MainActivity : AppCompatActivity() {
     private fun hideSystemUI() {
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN)
     }
 
 }
