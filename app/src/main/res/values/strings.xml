@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ForeHead</string>
+    <string name="welcome_title">Witaj w grze Czółko!</string>
+    <string name="category_title">Wybierz kategorię</string>
+</resources>
