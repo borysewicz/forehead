@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity" android:background="@color/tile_screen_background" android:id="@+id/welcome_CL">
+        tools:context=".activities.MainActivity" android:background="@color/tile_screen_background" android:id="@+id/welcome_CL">
     <Button
             android:text="Zagraj"
             android:layout_width="0dp"

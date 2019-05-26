@@ -1,11 +1,11 @@
-package com.example.forehead
+package com.example.forehead.activities
 
 import android.content.Intent
-import android.media.Image
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import com.example.forehead.R
 import com.example.forehead.model.Category
 
 class CategoryActivity : AppCompatActivity() {
@@ -33,7 +33,7 @@ class CategoryActivity : AppCompatActivity() {
     }
 
     private fun startGameActivity(category: Category) {
-            val intent = Intent(this,GameActivity::class.java)
+            val intent = Intent(this, GameActivity::class.java)
             intent.putExtra(CAT_KEY,category)
             startActivity(intent)
     }

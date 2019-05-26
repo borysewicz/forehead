@@ -11,11 +11,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".GameActivity" android:screenOrientation="landscape">
+        <activity android:name=".activities.GameActivity" android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".CategoryActivity">
+        <activity android:name=".activities.CategoryActivity">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
