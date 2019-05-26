@@ -2,9 +2,10 @@ package com.example.forehead.repository
 
 import com.example.forehead.model.Category
 import com.example.forehead.model.Question
+import java.util.*
 
 class TestQuestionRepository : QuestionRepository {
-    override fun getQuestions(category: Category): List<Question> {
+    override fun getQuestions(category: Category): Queue<Question> {
         return when(category){
             Category.FOOD -> returnFoodQuestions()
             Category.GEOGRAPHY -> returnGeographyQuestions()
@@ -13,8 +14,9 @@ class TestQuestionRepository : QuestionRepository {
         }
     }
 
-    private fun returnFictionalQuestions(): List<Question> {
-        return listOf(
+    private fun returnFictionalQuestions(): Queue<Question> {
+        val questionQueue = LinkedList<Question>()
+        questionQueue.addAll(listOf(
             Question("Thor", "Młot, Avengers"),
             Question("Harry Potter", "Czarodziej, książka"),
             Question("Jon Snow", "Gra o tron"),
@@ -25,11 +27,13 @@ class TestQuestionRepository : QuestionRepository {
             Question("Pokahontas", "Indianka, bajka"),
             Question("Nemo", "Rybka, bajka"),
             Question("Papa smerf", "Niebieski z czerwoną czapką, bajka")
-        )
+        ))
+        return questionQueue
     }
 
-    private fun returnMusicQuestions(): List<Question> {
-        return listOf(
+    private fun returnMusicQuestions(): Queue<Question> {
+        val questionQueue = LinkedList<Question>()
+        questionQueue.addAll(listOf(
             Question("Karma Police", "Radiohead"),
             Question("Bohemian Rhapsody", "Queen"),
             Question("Chciałem Być", "Krzysztof Krawczyk"),
@@ -40,11 +44,13 @@ class TestQuestionRepository : QuestionRepository {
             Question("Africa", "Toto"),
             Question("ściernisko", "Golec uOrkiestra"),
             Question("Oj ne ne", "Akcent")
-        )
+        ))
+        return questionQueue
     }
 
-    private fun returnGeographyQuestions(): List<Question> {
-        return listOf(
+    private fun returnGeographyQuestions(): Queue<Question> {
+        val questionQueue = LinkedList<Question>()
+        questionQueue.addAll(listOf(
             Question("Delhi", "Indie"),
             Question("Mediolan", "Włochy"),
             Question("Morena czołowa", "Lodowiec"),
@@ -55,11 +61,13 @@ class TestQuestionRepository : QuestionRepository {
             Question("Morze Adriatyckie", "Chorwacja"),
             Question("Sewilla", "Hiszpania"),
             Question("Florencja", "Włochy")
-        )
+        ))
+        return questionQueue
     }
 
-    private fun returnFoodQuestions() : List<Question> {
-        return listOf(
+    private fun returnFoodQuestions() : Queue<Question> {
+        val questionQueue = LinkedList<Question>()
+        questionQueue.addAll(listOf(
             Question("Awokado", "Owoc"),
             Question("Produkty zbożowe", "Chleb, Mąka"),
             Question("Sałatka jarzynowa", "święta"),
@@ -70,6 +78,7 @@ class TestQuestionRepository : QuestionRepository {
             Question("Nutella", "Słoik, czekolada"),
             Question("Gordon Ramsay", "Kucharz, Szkocja"),
             Question("Magda Gessler", "Kuchenne Rewolucje")
-        )
+        ))
+        return questionQueue
     }
 }

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".gameFragments.AnswerFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context=".gameFragments.AnswerFragment"
+                                             android:id="@+id/answer_fragmemt_CL"
+                                             android:background="@color/tile_screen_background">
     <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
-
-</FrameLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/answer_answer_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:textSize="100sp"
+            android:textColor="@android:color/white" android:fontFamily="sans-serif" android:text="Answer"/>
+</android.support.constraint.ConstraintLayout>
