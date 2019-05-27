@@ -52,7 +52,7 @@ object RotationSensorListener: SensorEventListener {
     }
 
     enum class Orientation(val roll: Int){
-        PLAYABLE(60), CORRECT_ANSWER(15)
+        PLAYABLE(60), CORRECT_ANSWER(20)
     }
 
 }
