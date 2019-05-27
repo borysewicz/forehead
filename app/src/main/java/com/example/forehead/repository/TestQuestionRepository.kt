@@ -5,16 +5,16 @@ import com.example.forehead.model.Question
 import java.util.*
 
 class TestQuestionRepository : QuestionRepository {
-    override fun getQuestions(category: Category): Queue<Question> {
+    override fun getQuestions(category: Category, questions: Int): Queue<Question> {
         return when(category){
-            Category.FOOD -> returnFoodQuestions()
-            Category.GEOGRAPHY -> returnGeographyQuestions()
-            Category.MUSIC -> returnMusicQuestions()
-            Category.FICTIONAl -> returnFictionalQuestions()
+            Category.FOOD -> returnFoodQuestions(questions)
+            Category.GEOGRAPHY -> returnGeographyQuestions(questions)
+            Category.MUSIC -> returnMusicQuestions(questions)
+            Category.FICTIONAl -> returnFictionalQuestions(questions)
         }
     }
 
-    private fun returnFictionalQuestions(): Queue<Question> {
+    private fun returnFictionalQuestions(questions: Int): Queue<Question> {
         val questionQueue = LinkedList<Question>()
         questionQueue.addAll(listOf(
             Question("Thor", "Młot, Avengers"),
@@ -31,7 +31,7 @@ class TestQuestionRepository : QuestionRepository {
         return questionQueue
     }
 
-    private fun returnMusicQuestions(): Queue<Question> {
+    private fun returnMusicQuestions(questions: Int): Queue<Question> {
         val questionQueue = LinkedList<Question>()
         questionQueue.addAll(listOf(
             Question("Karma Police", "Radiohead"),
@@ -48,7 +48,7 @@ class TestQuestionRepository : QuestionRepository {
         return questionQueue
     }
 
-    private fun returnGeographyQuestions(): Queue<Question> {
+    private fun returnGeographyQuestions(questions: Int): Queue<Question> {
         val questionQueue = LinkedList<Question>()
         questionQueue.addAll(listOf(
             Question("Delhi", "Indie"),
@@ -65,7 +65,7 @@ class TestQuestionRepository : QuestionRepository {
         return questionQueue
     }
 
-    private fun returnFoodQuestions() : Queue<Question> {
+    private fun returnFoodQuestions(questions: Int): Queue<Question> {
         val questionQueue = LinkedList<Question>()
         questionQueue.addAll(listOf(
             Question("Awokado", "Owoc"),

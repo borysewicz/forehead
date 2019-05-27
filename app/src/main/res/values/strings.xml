@@ -5,4 +5,7 @@
     <string name="question_pass">Pasuję</string>
     <string name="question_time_up">Czas minął</string>
     <string name="question_correct">Dobrze</string>
+    <string name="endgame_header">Gra skończona!</string>
+    <string name="endgame_corr_answers">Poprawnych opowiedzi:</string>
+    <string name="endgame_return">Powrót</string>
 </resources>

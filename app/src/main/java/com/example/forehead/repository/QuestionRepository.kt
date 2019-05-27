@@ -6,5 +6,5 @@ import java.util.*
 
 interface QuestionRepository {
 
-    fun getQuestions(category: Category) : Queue<Question>
+    fun getQuestions(category: Category, questions: Int) : Queue<Question>
 }

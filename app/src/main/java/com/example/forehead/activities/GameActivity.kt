@@ -1,6 +1,7 @@
 package com.example.forehead.activities
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.support.v7.app.AppCompatActivity
@@ -27,15 +28,23 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
     private lateinit var questionFragment: QuestionFragment
     private lateinit var answerFragment: AnswerFragment
     private lateinit var questions : Queue<Question>
-    private val timeForResult = 1500L
-    private val timeForOrientationChange = 100L
+
     private lateinit var sensorManager : SensorManager
     private lateinit var rotationSensor : Sensor
+    private var correctAnswers = 0
+
+    companion object {
+        const val CORR_ANSWERS: String = "correct_answers"
+       const val QUESTION_NUMBER_KEY = "question_number"
+        private const val timeForResult = 1500L
+        private const val timeForOrientationChange = 200L
+        private const val QUESTION_NUMBER = 10
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        questions = TestQuestionRepository().getQuestions(intent.extras.get(CAT_KEY) as Category)
+        questions = TestQuestionRepository().getQuestions(intent.extras.get(CAT_KEY) as Category,QUESTION_NUMBER)
         questionFragment = QuestionFragment()
         answerFragment = AnswerFragment()
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -64,17 +73,18 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
 
 
     private fun loadQuestion() {
-        if (questions.peek() == null){
-            endGame()
-        }
         if (RotationSensorListener.getOrientation() != RotationSensorListener.Orientation.PLAYABLE){
             Handler().postDelayed({
                 loadQuestion()
             }, timeForOrientationChange)  //if the device is in the wrong orientation, try again in a moment
             return
         }
-        questionFragment.replaceQuestion(questions.poll())
-        swapFragments(questionFragment)
+        try{
+            questionFragment.replaceQuestion(questions.poll())
+            swapFragments(questionFragment)
+        }catch(e: IllegalStateException){
+            endGame()
+        }
     }
 
     private fun swapFragments(toSwap: Fragment){
@@ -87,7 +97,10 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
     override fun onAnswerGiven(result: QuestionResult) {
         when (result) {
             QuestionResult.PASS -> answerFragment.setAnswer(getString(R.string.question_pass))
-            QuestionResult.CORRECT -> answerFragment.setAnswer(getString(R.string.question_correct))
+            QuestionResult.CORRECT -> {
+                correctAnswers++
+                answerFragment.setAnswer(getString(R.string.question_correct))
+            }
             else -> answerFragment.setAnswer(getString(R.string.question_time_up))
         }
         swapFragments(answerFragment)
@@ -98,8 +111,13 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
     }
 
 
+
     private fun endGame() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(this, EndGameActivity::class.java)
+        intent.putExtra(CORR_ANSWERS,correctAnswers)
+        intent.putExtra(QUESTION_NUMBER_KEY, QUESTION_NUMBER)
+        startActivity(intent)
+        finish()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

@@ -14,6 +14,7 @@ import com.example.forehead.model.Question
 import com.example.forehead.sensor.RotationSensorListener
 import android.os.CountDownTimer
 import com.example.forehead.R
+import com.example.forehead.support.SafeClickListener
 
 
 class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserver {
@@ -52,9 +53,12 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.findViewById<TextView>(R.id.question_question_TV).text = question
         view.findViewById<TextView>(R.id.question_tip_TV).text = tip
-        view.findViewById<ConstraintLayout>(R.id.question_fragment_CL).setOnClickListener {
+        view.findViewById<ConstraintLayout>(R.id.question_fragment_CL).setSafeOnClickListener {
             listener?.onAnswerGiven(QuestionResult.PASS)
         }
+        /*{
+            listener?.onAnswerGiven(QuestionResult.PASS)
+        }*/
     }
 
     override fun onPause() {
@@ -90,6 +94,14 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
 
     interface QuestionFragmentListener {
         fun onAnswerGiven(result: QuestionResult)
+    }
+
+    fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
+
+        val safeClickListener = SafeClickListener {
+            onSafeClick(it)
+        }
+        setOnClickListener(safeClickListener)
     }
 
 }
