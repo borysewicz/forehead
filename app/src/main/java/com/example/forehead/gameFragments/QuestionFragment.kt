@@ -14,11 +14,13 @@ import com.example.forehead.model.Question
 import com.example.forehead.sensor.RotationSensorListener
 import android.os.CountDownTimer
 import com.example.forehead.R
+import com.example.forehead.model.Category
 import com.example.forehead.support.SafeClickListener
 
 
 class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserver {
 
+    var category: Category? = null
     private var question: String? = null
     private var tip: String? = null
     private var listener: QuestionFragmentListener? = null
@@ -56,9 +58,17 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
         view.findViewById<ConstraintLayout>(R.id.question_fragment_CL).setSafeOnClickListener {
             listener?.onAnswerGiven(QuestionResult.PASS)
         }
-        /*{
-            listener?.onAnswerGiven(QuestionResult.PASS)
-        }*/
+        setCategoryName()
+    }
+
+    private fun setCategoryName() {
+        if (category == null) return
+        when (category){
+            Category.FICTIONAl -> view?.findViewById<TextView>(R.id.question_category)?.text = getString(R.string.fictional_cat)
+            Category.MUSIC -> view?.findViewById<TextView>(R.id.question_category)?.text = getString(R.string.music_cat)
+            Category.GEOGRAPHY -> view?.findViewById<TextView>(R.id.question_category)?.text = getString(R.string.geography_cat)
+            Category.FOOD -> view?.findViewById<TextView>(R.id.question_category)?.text = getString(R.string.food_cat)
+        }
     }
 
     override fun onPause() {
@@ -77,6 +87,7 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
         this.question = nextQuestion.question
         this.tip = nextQuestion.tip
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

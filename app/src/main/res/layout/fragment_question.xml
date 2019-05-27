@@ -6,7 +6,7 @@
                                              android:layout_height="match_parent"
                                              tools:context=".gameFragments.QuestionFragment"
                                              android:id="@+id/question_fragment_CL"
-                                             android:background="@color/tile_screen_background"
+                                             android:background="@drawable/game"
                                              android:clickable="true">
     <TextView
             android:layout_width="wrap_content"
@@ -32,4 +32,13 @@
             android:layout_marginEnd="64dp"
             app:layout_constraintBottom_toBottomOf="parent" android:textSize="40sp" android:layout_marginBottom="32dp"
             android:textColor="@android:color/white"/>
+    <TextView
+            android:text="Category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question_category"
+            android:textColor="@android:color/white" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:textSize="36sp"/>
 </android.support.constraint.ConstraintLayout>

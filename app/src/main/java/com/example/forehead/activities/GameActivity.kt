@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
-import android.util.Log
 
 import android.view.View
 import com.example.forehead.R
@@ -46,6 +45,7 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         setContentView(R.layout.activity_game)
         questions = TestQuestionRepository().getQuestions(intent.extras.get(CAT_KEY) as Category,QUESTION_NUMBER)
         questionFragment = QuestionFragment()
+        questionFragment.category = intent.extras.get(CAT_KEY) as Category
         answerFragment = AnswerFragment()
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
@@ -79,11 +79,12 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
             }, timeForOrientationChange)  //if the device is in the wrong orientation, try again in a moment
             return
         }
-        try{
+        if (questions.isEmpty()){
+            endGame()
+        }
+        else{
             questionFragment.replaceQuestion(questions.poll())
             swapFragments(questionFragment)
-        }catch(e: IllegalStateException){
-            endGame()
         }
     }
 
@@ -96,12 +97,12 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
 
     override fun onAnswerGiven(result: QuestionResult) {
         when (result) {
-            QuestionResult.PASS -> answerFragment.setAnswer(getString(R.string.question_pass))
+            QuestionResult.PASS -> answerFragment.setAnswer(result,getString(R.string.question_pass) )
             QuestionResult.CORRECT -> {
                 correctAnswers++
-                answerFragment.setAnswer(getString(R.string.question_correct))
+                answerFragment.setAnswer(result,getString(R.string.question_correct))
             }
-            else -> answerFragment.setAnswer(getString(R.string.question_time_up))
+            else -> answerFragment.setAnswer(result,getString(R.string.question_time_up))
         }
         swapFragments(answerFragment)
 

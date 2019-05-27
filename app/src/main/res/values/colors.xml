@@ -3,7 +3,7 @@
     <color name="colorPrimary">#398CBF</color>
     <color name="colorPrimaryDark">#4FDC5A</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="tile_screen_background">#043B5A</color>
+    <color name="tile_screen_background">#0090E7</color>
     <color name="title_screen_buttons">#4FDC5A</color>
     <color name="transparent">#00FFFFFF</color>
 </resources>

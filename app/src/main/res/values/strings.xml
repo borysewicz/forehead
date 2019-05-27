@@ -8,4 +8,8 @@
     <string name="endgame_header">Gra skończona!</string>
     <string name="endgame_corr_answers">Poprawnych opowiedzi:</string>
     <string name="endgame_return">Powrót</string>
+    <string name="music_cat">Muzyka</string>
+    <string name="food_cat">Jedzenie</string>
+    <string name="fictional_cat">Postacie fikcyjne</string>
+    <string name="geography_cat">Geografia</string>
 </resources>

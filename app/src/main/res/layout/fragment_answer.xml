@@ -6,7 +6,7 @@
                                              android:layout_height="match_parent"
                                              tools:context=".gameFragments.AnswerFragment"
                                              android:id="@+id/answer_fragmemt_CL"
-                                             android:background="@color/tile_screen_background">
+                                             android:background="@drawable/correct__background">
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/answer_answer_TV"

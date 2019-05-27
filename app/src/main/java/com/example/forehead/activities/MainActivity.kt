@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import com.example.forehead.R
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initiateButtons() {
-        findViewById<Button>(R.id.welcome_newGame_B).setOnClickListener{
+        findViewById<ImageButton>(R.id.welcome_newGame_B).setOnClickListener{
             val intent = Intent(this, CategoryActivity::class.java)
             startActivity(intent)
         }
