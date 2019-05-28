@@ -89,7 +89,9 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type == Sensor.TYPE_PROXIMITY){
-            view?.findViewById<TextView>(R.id.question_tip_TV)?.visibility = View.VISIBLE
+            if (event.values[0] < event.sensor.maximumRange){
+                view?.findViewById<TextView>(R.id.question_tip_TV)?.visibility = View.VISIBLE
+            }
         }
     }
 
