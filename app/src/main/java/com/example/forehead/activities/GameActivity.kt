@@ -41,13 +41,13 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
        const val QUESTION_NUMBER_KEY = "question_number"
         private const val timeForResult = 1500L
         private const val timeForOrientationChange = 200L
-        private const val QUESTION_NUMBER = 10
+        private const val NUMBER_OF_QUESTIONS = 10
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        questions = TestQuestionRepository().getQuestions(intent.extras.get(CAT_KEY) as Category,QUESTION_NUMBER)
+        questions = TestQuestionRepository().getQuestions(intent.extras.get(CAT_KEY) as Category,NUMBER_OF_QUESTIONS)
         questionFragment = QuestionFragment()
         questionFragment.category = intent.extras.get(CAT_KEY) as Category
         answerFragment = AnswerFragment()
@@ -60,18 +60,17 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
 
     override fun onStart() {
         super.onStart()
-        rotationSensor.also { rotSensor ->
-            sensorManager.registerListener(RotationSensorListener, rotSensor, SensorManager.SENSOR_DELAY_NORMAL) // TODO: Fix this
-        }
-        proxSensor.also { proximitySensor ->
-            sensorManager.registerListener(questionFragment,proximitySensor,SensorManager.SENSOR_DELAY_NORMAL)
-        }
+        registerSensorListeners()
         swapFragments(countingFragment)
     }
     override fun onResume() {
         super.onResume()
+        registerSensorListeners()
+    }
+
+    private fun registerSensorListeners(){
         rotationSensor.also { rotSensor ->
-            sensorManager.registerListener(RotationSensorListener, rotSensor,500000,200) // make constants
+            sensorManager.registerListener(RotationSensorListener, rotSensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
         proxSensor.also { proximitySensor ->
             sensorManager.registerListener(questionFragment,proximitySensor,SensorManager.SENSOR_DELAY_NORMAL)
@@ -84,6 +83,12 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         sensorManager.unregisterListener(questionFragment)
     }
 
+    private fun swapFragments(toSwap: Fragment){
+        val fragManager = supportFragmentManager
+        val transaction =  fragManager.beginTransaction()
+        transaction.replace(R.id.activeFragment,toSwap)
+        transaction.commit()
+    }
 
     private fun loadQuestion() {
         if (RotationSensorListener.getOrientation() != RotationSensorListener.Orientation.PLAYABLE){
@@ -101,14 +106,7 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         }
     }
 
-    private fun swapFragments(toSwap: Fragment){
-        val fragManager = supportFragmentManager
-        val transaction =  fragManager.beginTransaction()
-        transaction.replace(R.id.activeFragment,toSwap)
-        transaction.commit()
-    }
-
-    override fun onCountdownFinished() {
+    override fun onCountdownFinished() { //when the counting fragment is done counting, the game starts
         loadQuestion()
     }
 
@@ -128,12 +126,10 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         }, timeForResult)  //after specific amount of time we load the next question
     }
 
-
-
     private fun endGame() {
         val intent = Intent(this, EndGameActivity::class.java)
         intent.putExtra(CORR_ANSWERS,correctAnswers)
-        intent.putExtra(QUESTION_NUMBER_KEY, QUESTION_NUMBER)
+        intent.putExtra(QUESTION_NUMBER_KEY, NUMBER_OF_QUESTIONS)
         startActivity(intent)
         finish()
     }

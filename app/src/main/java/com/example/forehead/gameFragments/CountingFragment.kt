@@ -1,7 +1,6 @@
 package com.example.forehead.gameFragments
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.app.Fragment
@@ -11,17 +10,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.example.forehead.R
-import com.example.forehead.activities.QuestionResult
 import com.example.forehead.sensor.RotationSensorListener
 
 class CountingFragment : Fragment(), RotationSensorListener.RotationSensorObserver {
 
     private var listener: OnCountdownFinished? = null
     private var timer : CountDownTimer? = null
-    private val COUNTING_TIME = 3100L
-    private val SECOND_IN_MILIS = 1000L
-    private var remainingTime = 0
     private var isCounting: Boolean = false
+
+    companion object {
+        const val COUNTING_TIME = 3100L
+        const val SECOND_IN_MILIS = 1000L
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +56,11 @@ class CountingFragment : Fragment(), RotationSensorListener.RotationSensorObserv
         if(orientation == RotationSensorListener.Orientation.PLAYABLE && !isCounting){
             isCounting = true
             timer?.start()
+        }
+        else if (orientation != RotationSensorListener.Orientation.PLAYABLE && isCounting){
+            isCounting = false
+            view?.findViewById<TextView>(R.id.counting_main_TV)?.text = getString(R.string.counting_prepare)
+            timer?.cancel()
         }
     }
 

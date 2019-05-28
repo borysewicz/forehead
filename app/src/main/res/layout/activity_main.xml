@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.MainActivity" android:background="@drawable/normal_background"
+        tools:context=".activities.WelcomeActivity" android:background="@drawable/normal_background"
         android:id="@+id/welcome_CL">
     <ImageView
             android:layout_width="wrap_content"
