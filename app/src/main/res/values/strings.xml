@@ -12,4 +12,8 @@
     <string name="food_cat">Jedzenie</string>
     <string name="fictional_cat">Postacie fikcyjne</string>
     <string name="geography_cat">Geografia</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="counting_prepare">Przyłóż telefon do czoła</string>
 </resources>

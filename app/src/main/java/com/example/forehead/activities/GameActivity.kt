@@ -13,6 +13,7 @@ import android.view.View
 import com.example.forehead.R
 import com.example.forehead.activities.CategoryActivity.Companion.CAT_KEY
 import com.example.forehead.gameFragments.AnswerFragment
+import com.example.forehead.gameFragments.CountingFragment
 import com.example.forehead.gameFragments.QuestionFragment
 import com.example.forehead.model.Category
 import com.example.forehead.model.Question
@@ -22,10 +23,12 @@ import java.util.*
 
 
 
-class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListener {
+class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListener, CountingFragment.OnCountdownFinished {
+
 
     private lateinit var questionFragment: QuestionFragment
     private lateinit var answerFragment: AnswerFragment
+    private lateinit var countingFragment: CountingFragment
     private lateinit var questions : Queue<Question>
 
     private lateinit var sensorManager : SensorManager
@@ -47,6 +50,7 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         questionFragment = QuestionFragment()
         questionFragment.category = intent.extras.get(CAT_KEY) as Category
         answerFragment = AnswerFragment()
+        countingFragment = CountingFragment()
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
         RotationSensorListener.setSensor(rotationSensor)
@@ -55,9 +59,9 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
     override fun onStart() {
         super.onStart()
         rotationSensor.also { rotSensor ->
-            sensorManager.registerListener(RotationSensorListener, rotSensor, SensorManager.SENSOR_DELAY_NORMAL)
+            sensorManager.registerListener(RotationSensorListener, rotSensor, SensorManager.SENSOR_DELAY_NORMAL) // TODO: Fix this
         }
-        loadQuestion()
+        swapFragments(countingFragment)
     }
     override fun onResume() {
         super.onResume()
@@ -93,6 +97,10 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         val transaction =  fragManager.beginTransaction()
         transaction.replace(R.id.activeFragment,toSwap)
         transaction.commit()
+    }
+
+    override fun onCountdownFinished() {
+        loadQuestion()
     }
 
     override fun onAnswerGiven(result: QuestionResult) {
