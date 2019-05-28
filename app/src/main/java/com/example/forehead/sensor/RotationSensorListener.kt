@@ -23,7 +23,8 @@ object RotationSensorListener: SensorEventListener {
 
      fun  getOrientation() : Orientation{
         return when{
-            currentRoll < Orientation.CORRECT_ANSWER.roll -> RotationSensorListener.Orientation.CORRECT_ANSWER
+            currentRoll < Orientation.SCREEN_UP.roll -> RotationSensorListener.Orientation.SCREEN_UP
+            currentRoll > Orientation.SCREEN_DOWN.roll -> RotationSensorListener.Orientation.SCREEN_DOWN
             else -> Orientation.PLAYABLE
         }
     }
@@ -52,7 +53,7 @@ object RotationSensorListener: SensorEventListener {
     }
 
     enum class Orientation(val roll: Int){
-        PLAYABLE(60), CORRECT_ANSWER(20)
+        PLAYABLE(60), SCREEN_UP(20),SCREEN_DOWN(150)
     }
 
 }

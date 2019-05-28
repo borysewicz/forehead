@@ -82,7 +82,7 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
 
     override fun onRotationChanged(orientation: RotationSensorListener.Orientation) {
         Log.d("ROLL",orientation.toString())
-        if (orientation == RotationSensorListener.Orientation.CORRECT_ANSWER){
+        if (orientation == RotationSensorListener.Orientation.SCREEN_DOWN || orientation == RotationSensorListener.Orientation.SCREEN_UP){
             listener?.onAnswerGiven(QuestionResult.CORRECT)
         }
     }
