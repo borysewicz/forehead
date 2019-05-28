@@ -1,6 +1,9 @@
 package com.example.forehead.gameFragments
 
 import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
@@ -18,7 +21,8 @@ import com.example.forehead.model.Category
 import com.example.forehead.support.SafeClickListener
 
 
-class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserver {
+class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserver, SensorEventListener {
+
 
     var category: Category? = null
     private var question: String? = null
@@ -81,6 +85,15 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
         if (orientation == RotationSensorListener.Orientation.CORRECT_ANSWER){
             listener?.onAnswerGiven(QuestionResult.CORRECT)
         }
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type == Sensor.TYPE_PROXIMITY){
+            view?.findViewById<TextView>(R.id.question_tip_TV)?.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
 
     fun replaceQuestion(nextQuestion: Question){

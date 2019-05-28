@@ -33,6 +33,7 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
 
     private lateinit var sensorManager : SensorManager
     private lateinit var rotationSensor : Sensor
+    private lateinit var proxSensor : Sensor
     private var correctAnswers = 0
 
     companion object {
@@ -53,6 +54,7 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         countingFragment = CountingFragment()
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
+        proxSensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
         RotationSensorListener.setSensor(rotationSensor)
     }
 
@@ -61,6 +63,9 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         rotationSensor.also { rotSensor ->
             sensorManager.registerListener(RotationSensorListener, rotSensor, SensorManager.SENSOR_DELAY_NORMAL) // TODO: Fix this
         }
+        proxSensor.also { proximitySensor ->
+            sensorManager.registerListener(questionFragment,proximitySensor,SensorManager.SENSOR_DELAY_NORMAL)
+        }
         swapFragments(countingFragment)
     }
     override fun onResume() {
@@ -68,11 +73,15 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         rotationSensor.also { rotSensor ->
             sensorManager.registerListener(RotationSensorListener, rotSensor,500000,200) // make constants
         }
+        proxSensor.also { proximitySensor ->
+            sensorManager.registerListener(questionFragment,proximitySensor,SensorManager.SENSOR_DELAY_NORMAL)
+        }
     }
 
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(RotationSensorListener)
+        sensorManager.unregisterListener(questionFragment)
     }
 
 
