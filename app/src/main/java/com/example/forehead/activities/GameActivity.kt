@@ -18,7 +18,7 @@ import com.example.forehead.gameFragments.QuestionFragment
 import com.example.forehead.model.Category
 import com.example.forehead.model.Question
 import com.example.forehead.repository.TestQuestionRepository
-import com.example.forehead.sensor.RotationSensorListener
+import com.example.forehead.sensor.OrientationSensor
 import java.util.*
 
 
@@ -55,7 +55,7 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
         proxSensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
-        RotationSensorListener.setSensor(rotationSensor)
+        OrientationSensor.setSensor(rotationSensor)
     }
 
     override fun onStart() {
@@ -70,7 +70,7 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
 
     private fun registerSensorListeners(){
         rotationSensor.also { rotSensor ->
-            sensorManager.registerListener(RotationSensorListener, rotSensor, SensorManager.SENSOR_DELAY_NORMAL)
+            sensorManager.registerListener(OrientationSensor, rotSensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
         proxSensor.also { proximitySensor ->
             sensorManager.registerListener(questionFragment,proximitySensor,SensorManager.SENSOR_DELAY_NORMAL)
@@ -79,7 +79,7 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
 
     override fun onPause() {
         super.onPause()
-        sensorManager.unregisterListener(RotationSensorListener)
+        sensorManager.unregisterListener(OrientationSensor)
         sensorManager.unregisterListener(questionFragment)
     }
 
@@ -91,7 +91,7 @@ class GameActivity : AppCompatActivity(), QuestionFragment.QuestionFragmentListe
     }
 
     private fun loadQuestion() {
-        if (RotationSensorListener.getOrientation() != RotationSensorListener.Orientation.PLAYABLE){
+        if (OrientationSensor.getOrientation() != OrientationSensor.Orientation.PLAYABLE){
             Handler().postDelayed({
                 loadQuestion()
             }, timeForOrientationChange)  //if the device is in the wrong orientation, try again in a moment

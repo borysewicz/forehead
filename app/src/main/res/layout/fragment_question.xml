@@ -14,32 +14,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:textSize="80sp"
+            app:layout_constraintBottom_toBottomOf="parent" android:textSize="@dimen/question_question_fontSize"
             android:textColor="@android:color/white" android:fontFamily="sans-serif" android:text="Question"/>
     <TextView
             android:text="Tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/question_tip_TV" android:layout_marginTop="32dp"
+            android:id="@+id/question_tip_TV" android:layout_marginTop="@dimen/question_tip_marginTop"
             app:layout_constraintTop_toBottomOf="@+id/question_question_TV"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:textColor="@android:color/white" android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent" android:textColor="@android:color/white" android:textSize="@dimen/question_tip_fontSize"
             android:visibility="invisible"/>
     <TextView
             android:text="0:30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/question_timer_TV" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="64dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:textSize="40sp" android:layout_marginBottom="32dp"
+            android:layout_marginEnd="@dimen/question_timer_marginEnd"
+            app:layout_constraintBottom_toBottomOf="parent" android:textSize="@dimen/question_timer_fontSize" android:layout_marginBottom="@dimen/question_timer_marginBot"
             android:textColor="@android:color/white"/>
     <TextView
             android:text="Category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/question_category"
-            android:textColor="@android:color/white" android:layout_marginTop="32dp"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:textSize="36sp"/>
+            android:textColor="@android:color/white" android:layout_marginTop="@dimen/question_category_marginTop"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="@dimen/forehead_margin_elem"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="@dimen/forehead_margin_elem"
+            app:layout_constraintEnd_toEndOf="parent" android:textSize="@dimen/question_category_fontSize"/>
 </android.support.constraint.ConstraintLayout>

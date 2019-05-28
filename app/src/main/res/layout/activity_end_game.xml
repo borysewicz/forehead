@@ -11,36 +11,36 @@
             android:text="@string/endgame_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/endgame_header_TV" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:id="@+id/endgame_header_TV" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="@dimen/forehead_margin_elem"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="@dimen/forehead_margin_elem"
             app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@android:color/white" android:textSize="40sp" android:layout_marginTop="176dp"
+            android:textColor="@android:color/white" android:textSize="@dimen/endgame_header_fontSize" android:layout_marginTop="@dimen/endgame_header_marginTop"
     />
     <TextView
             android:text="@string/endgame_corr_answers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/endgame_corrAnswer_TV" android:layout_marginTop="32dp"
+            android:id="@+id/endgame_corrAnswer_TV" android:layout_marginTop="@dimen/endgame_corrAnswer_marginTop"
             app:layout_constraintTop_toBottomOf="@+id/endgame_header_TV" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:textColor="@android:color/white" android:textSize="30sp"
+            android:layout_marginEnd="@dimen/forehead_margin_elem" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/forehead_margin_elem" android:textColor="@android:color/white" android:textSize="@dimen/endgame_corrAnswer_fontSize"
     />
     <TextView
             android:text="2/10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/endgame_corAnswNumber_TV" android:layout_marginTop="32dp"
+            android:id="@+id/endgame_corAnswNumber_TV" android:layout_marginTop="@dimen/endgame_corrAnswer_marginTop"
             app:layout_constraintTop_toBottomOf="@+id/endgame_corrAnswer_TV" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:textColor="@android:color/white" android:textSize="36sp"/>
+            android:layout_marginEnd="@dimen/forehead_margin_elem" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/forehead_margin_elem" android:textColor="@android:color/white" android:textSize="@dimen/endgame_result_fontSize"/>
     <Button
-            android:layout_width="193dp"
-            android:layout_height="138dp"
+            android:layout_width="@dimen/endgame_button_width"
+            android:layout_height="@dimen/endgame_button_height"
             android:id="@+id/endgame_finish_B"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" style="@android:style/Widget.Holo.Button"
+            android:layout_marginEnd="@dimen/forehead_margin_elem" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/forehead_margin_elem" style="@android:style/Widget.Holo.Button"
             android:background="@color/title_screen_buttons" android:text="@string/endgame_return"
-            android:textColor="@android:color/white" android:textSize="36sp" android:layout_marginTop="64dp"
+            android:textColor="@android:color/white" android:textSize="@dimen/endgame_button_fontSize" android:layout_marginTop="@dimen/endgame_button_marginTop"
             app:layout_constraintTop_toBottomOf="@+id/endgame_corAnswNumber_TV"/>
 </android.support.constraint.ConstraintLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="category_returnButton_width">82dp</dimen>
+    <dimen name="category_returnButton_height">57dp</dimen>
+    <dimen name="category_returnButton_marginStart">16dp</dimen>
+    <dimen name="category_returnButton_marginBot">16dp</dimen>
+    <dimen name="category_header_height">150dp</dimen>
+    <dimen name="category_catImgButton_width">146dp</dimen>
+    <dimen name="category_catImgButton_height">107dp</dimen>
+    <dimen name="category_topCatImgButton_marginTop">150dp</dimen>
+    <dimen name="category_botCatImgButton_marginTop">64dp</dimen>
+    <dimen name="forehead_margin_elem">8dp</dimen>
+    <dimen name="endgame_header_fontSize">40sp</dimen>
+    <dimen name="endgame_header_marginTop">176dp</dimen>
+    <dimen name="endgame_corrAnswer_marginTop">32dp</dimen>
+    <dimen name="endgame_corrAnswer_fontSize">30sp</dimen>
+    <dimen name="endgame_result_fontSize">36sp</dimen>
+    <dimen name="endgame_button_width">193dp</dimen>
+    <dimen name="endgame_button_height">138dp</dimen>
+    <dimen name="endgame_button_fontSize">36sp</dimen>
+    <dimen name="endgame_button_marginTop">64dp</dimen>
+    <dimen name="welcome_header_height">150dp</dimen>
+    <dimen name="welcome_button_width">338dp</dimen>
+    <dimen name="welcome_button_height">197dp</dimen>
+    <dimen name="welcome_button_marginTop">32dp</dimen>
+    <dimen name="answer_fontSize">100sp</dimen>
+    <dimen name="counting_alert_fontSize">60sp</dimen>
+    <dimen name="counting_timer_fontSize">150sp</dimen>
+    <dimen name="question_question_fontSize">80sp</dimen>
+    <dimen name="question_tip_marginTop">32dp</dimen>
+    <dimen name="question_tip_fontSize">40sp</dimen>
+    <dimen name="question_timer_marginEnd">64dp</dimen>
+    <dimen name="question_timer_fontSize">40sp</dimen>
+    <dimen name="question_timer_marginBot">32dp</dimen>
+    <dimen name="question_category_marginTop">32dp</dimen>
+    <dimen name="question_category_fontSize">36sp</dimen>
+</resources>

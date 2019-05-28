@@ -7,34 +7,35 @@ import android.hardware.SensorEventListener
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.forehead.activities.QuestionResult
 import com.example.forehead.model.Question
-import com.example.forehead.sensor.RotationSensorListener
+import com.example.forehead.sensor.OrientationSensor
 import android.os.CountDownTimer
 import com.example.forehead.R
 import com.example.forehead.model.Category
 import com.example.forehead.support.SafeClickListener
 
 
-class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserver, SensorEventListener {
-
+class QuestionFragment : Fragment(), OrientationSensor.RotationSensorObserver, SensorEventListener {
 
     var category: Category? = null
     private var question: String? = null
     private var tip: String? = null
     private var listener: QuestionFragmentListener? = null
-    private val TIME_FOR_QUESTION = 30100L
-    private val SECOND_IN_MILIS = 1000L
     private var timer : CountDownTimer? = null
+
+    companion object {
+        const val TIME_FOR_QUESTION = 30100L
+        const val SECOND_IN_MILIS = 1000L
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        RotationSensorListener.registerListener(this)
+        OrientationSensor.registerListener(this)
         timer = object: CountDownTimer(TIME_FOR_QUESTION, SECOND_IN_MILIS) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsRemaining = millisUntilFinished/SECOND_IN_MILIS
@@ -66,7 +67,6 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
     }
 
     private fun setCategoryName() {
-        if (category == null) return
         when (category){
             Category.FICTIONAl -> view?.findViewById<TextView>(R.id.question_category)?.text = getString(R.string.fictional_cat)
             Category.MUSIC -> view?.findViewById<TextView>(R.id.question_category)?.text = getString(R.string.music_cat)
@@ -80,9 +80,8 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
         timer?.cancel()
     }
 
-    override fun onRotationChanged(orientation: RotationSensorListener.Orientation) {
-        Log.d("ROLL",orientation.toString())
-        if (orientation == RotationSensorListener.Orientation.SCREEN_DOWN || orientation == RotationSensorListener.Orientation.SCREEN_UP){
+    override fun onRotationChanged(orientation: OrientationSensor.Orientation) {
+        if (orientation == OrientationSensor.Orientation.SCREEN_DOWN || orientation == OrientationSensor.Orientation.SCREEN_UP){
             listener?.onAnswerGiven(QuestionResult.CORRECT)
         }
     }
@@ -122,7 +121,7 @@ class QuestionFragment : Fragment(), RotationSensorListener.RotationSensorObserv
         fun onAnswerGiven(result: QuestionResult)
     }
 
-    fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
+    private fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
 
         val safeClickListener = SafeClickListener {
             onSafeClick(it)

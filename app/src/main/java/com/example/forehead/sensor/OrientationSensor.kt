@@ -6,7 +6,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
 
-object RotationSensorListener: SensorEventListener {
+object OrientationSensor: SensorEventListener {
 
     private lateinit var rotationSensor : Sensor
     private val RADS_TO_DEGREES = -57
@@ -23,8 +23,8 @@ object RotationSensorListener: SensorEventListener {
 
      fun  getOrientation() : Orientation{
         return when{
-            currentRoll < Orientation.SCREEN_UP.roll -> RotationSensorListener.Orientation.SCREEN_UP
-            currentRoll > Orientation.SCREEN_DOWN.roll -> RotationSensorListener.Orientation.SCREEN_DOWN
+            currentRoll < Orientation.SCREEN_UP.roll -> OrientationSensor.Orientation.SCREEN_UP
+            currentRoll > Orientation.SCREEN_DOWN.roll -> OrientationSensor.Orientation.SCREEN_DOWN
             else -> Orientation.PLAYABLE
         }
     }
@@ -43,7 +43,7 @@ object RotationSensorListener: SensorEventListener {
         SensorManager.getRotationMatrixFromVector(rotationMatrix, values)
         val orientationAngles = FloatArray(3)
         SensorManager.getOrientation(rotationMatrix, orientationAngles)
-        currentRoll = Math.abs(orientationAngles[2] * RADS_TO_DEGREES)   // roll = angle of rotation about the y axis, the ordrr of values in orientation angles is: z, x y
+        currentRoll = Math.abs(orientationAngles[2] * RADS_TO_DEGREES)   // roll = angle of rotation about the y axis, the order of values in orientationAngles is: z, x y
         Log.d("ROLL", currentRoll.toString())
         listener?.onRotationChanged(getOrientation())
     }

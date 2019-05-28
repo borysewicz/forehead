@@ -4,15 +4,17 @@ import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v4.app.Fragment
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
 import com.example.forehead.R
-import com.example.forehead.sensor.RotationSensorListener
+import com.example.forehead.sensor.OrientationSensor
+import org.w3c.dom.Text
 
-class CountingFragment : Fragment(), RotationSensorListener.RotationSensorObserver {
+class CountingFragment : Fragment(), OrientationSensor.RotationSensorObserver {
 
     private var listener: OnCountdownFinished? = null
     private var timer : CountDownTimer? = null
@@ -49,20 +51,26 @@ class CountingFragment : Fragment(), RotationSensorListener.RotationSensorObserv
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        RotationSensorListener.registerListener(this)
+        OrientationSensor.registerListener(this)
     }
 
-    override fun onRotationChanged(orientation: RotationSensorListener.Orientation) {
-        if(orientation == RotationSensorListener.Orientation.PLAYABLE && !isCounting){
+    override fun onRotationChanged(orientation: OrientationSensor.Orientation) {
+        if(orientation == OrientationSensor.Orientation.PLAYABLE && !isCounting){
             isCounting = true
             timer?.start()
+            view?.findViewById<TextView>(R.id.counting_main_TV)?.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                                                                    resources.getDimension(R.dimen.counting_timer_fontSize))
         }
-        else if (orientation != RotationSensorListener.Orientation.PLAYABLE && isCounting){
+        else if (orientation != OrientationSensor.Orientation.PLAYABLE && isCounting){
             isCounting = false
-            view?.findViewById<TextView>(R.id.counting_main_TV)?.text = getString(R.string.counting_prepare)
-            timer?.cancel()
+
+            view?.findViewById<TextView>(R.id.counting_main_TV)?.also {
+                it.setTextSize(TypedValue.COMPLEX_UNIT_PX,resources.getDimension(R.dimen.counting_alert_fontSize))
+                it.text = getString(R.string.counting_prepare)
+            }
+                timer?.cancel()
+            }
         }
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -77,7 +85,6 @@ class CountingFragment : Fragment(), RotationSensorListener.RotationSensorObserv
         super.onDetach()
         listener = null
     }
-
    
     interface OnCountdownFinished {
         fun onCountdownFinished()

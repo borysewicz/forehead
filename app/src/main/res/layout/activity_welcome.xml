@@ -9,17 +9,17 @@
         android:id="@+id/welcome_CL">
     <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="150dp" app:srcCompat="@drawable/header_main"
+            android:layout_height="@dimen/welcome_header_height" app:srcCompat="@drawable/header_main"
             android:id="@+id/welcome_header"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:scaleType="fitStart"/>
     <ImageButton
-            android:layout_width="338dp"
-            android:layout_height="197dp" app:srcCompat="@drawable/new_game_button"
-            android:id="@+id/welcome_newGame_B" android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/welcome_header" android:layout_marginBottom="8dp"
+            android:layout_width="@dimen/welcome_button_width"
+            android:layout_height="@dimen/welcome_button_height" app:srcCompat="@drawable/new_game_button"
+            android:id="@+id/welcome_newGame_B" android:layout_marginTop="@dimen/welcome_button_marginTop"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_header" android:layout_marginBottom="@dimen/forehead_margin_elem"
             app:layout_constraintBottom_toBottomOf="parent" android:scaleType="centerInside"
             android:background="@color/transparent" app:layout_constraintVertical_bias="0.496"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginEnd="@dimen/forehead_margin_elem" app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="@dimen/forehead_margin_elem"
             app:layout_constraintStart_toStartOf="parent"/>
 </android.support.constraint.ConstraintLayout>
